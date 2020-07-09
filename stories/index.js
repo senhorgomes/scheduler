@@ -135,3 +135,5 @@ storiesOf("InterviewerList", module)
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
   .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time ="12pm" />)
+  .add("Header", () => <Header time ="12pm" />)
