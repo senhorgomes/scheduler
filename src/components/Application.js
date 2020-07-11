@@ -35,7 +35,27 @@ const appointments = [
         avatar: "https://i.imgur.com/LpaY82x.png",
       }
     }
-  }
+  },
+  {
+    id: 3,
+    time: "2pm",
+  },
+  {
+    id: 4,
+    time: "3pm",
+  },
+  {
+    id: 5,
+    time: "4pm",
+    interview: {
+      student: "Bryan Gomes",
+      interviewer: {
+        id: 2, 
+        name: "Tori Malcolm", 
+        avatar: "https://i.imgur.com/Nmx0Qxo.png"
+      }
+    }
+  },
 ];
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
