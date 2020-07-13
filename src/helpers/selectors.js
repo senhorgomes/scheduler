@@ -14,3 +14,16 @@ export function getAppointmentsForDay(state, day) {
 
   return appointmentsMap;
 }
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+  console.log(`this is getInterview ${JSON.stringify(state)}`);
+  const newInterview = {
+    "student": interview.student,
+    "interviewer": state.interviewers[interview.interviewer]
+  }
+  return newInterview;
+  //obtain the object above and place it interview.interviewer
+}
