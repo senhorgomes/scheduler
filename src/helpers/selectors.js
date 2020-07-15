@@ -38,9 +38,9 @@ export function getInterviewersForDay(state, day) {
     return [];
   }
   //This will run through the appointments of the days, through the appointments obj, and return a new array 
-  const appointmentsMap = filteredDays[0].appointments.map((appointment) => {
-    return state.appointments[appointment];
+  const interviewersMap = filteredDays[0].interviewers.map((interviewer) => {
+    return state.interviewers[interviewer];
   })
 
-  return appointmentsMap;
+  return interviewersMap;
 }

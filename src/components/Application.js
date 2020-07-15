@@ -6,15 +6,35 @@ import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
 
 export default function Application(props) {
-  //Retreiving days from api/days and storing them using useState
-  // const [days, setDay] = useState([]);
-  const setDay = day => setState({ ...state, day });
   //const setDays = days => setState(prev => ({ ...prev, days }));
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {}
   });
+
+  const setDay = day => setState({ ...state, day });
+
+  //Retreiving days from api/days and storing them using useState
+  // const [days, setDay] = useState([]);
+  const bookInterview = (id, interview) => {
+    
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    axios.put(`/api/appointments/${id}`, appointment);
+    setState({
+      ...state,
+      appointments
+    });
+    console.log(id, interview);
+  }
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -28,6 +48,7 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day);
   const scheduler = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    console.log(interviewers);
     return (
       <Appointment
         key={appointment.id}
@@ -35,6 +56,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     )
   })
@@ -50,6 +72,7 @@ export default function Application(props) {
         <nav className="sidebar__menu">
           <DayList
             days={state.days}
+            day={state.day}
             setDay={setDay}
           />
         </nav>
