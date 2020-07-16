@@ -23,12 +23,24 @@ export default function useAplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    
+    const newState = {...state, appointments}
+    const newDays = newState.days.map(day => {
+      let newSpots = 0
+      const appointmentsForDay = day.appointments
+      for (let appointmentId of appointmentsForDay) {
+        const appointment = newState.appointments[appointmentId]
+        if (appointment.interview === null) {
+          newSpots++
+        }
+      }
+      return {...day, spots: newSpots}
+    })
+    const finalState = {...newState, days: newDays}
+
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(() => setState({
-        ...state,
-        appointments
-      })
+      .then(() => setState(
+        finalState
+      )
     );
   }
   //Deletes interview by setting the interview to null
@@ -41,11 +53,23 @@ export default function useAplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const newState = {...state, appointments}
+    const newDays = newState.days.map(day => {
+      let newSpots = 0
+      const appointmentsForDay = day.appointments
+      for (let appointmentId of appointmentsForDay) {
+        const appointment = newState.appointments[appointmentId]
+        if (appointment.interview === null) {
+          newSpots++
+        }
+      }
+      return {...day, spots: newSpots}
+    })
+    const finalState = {...newState, days: newDays}
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => setState({
-        ...state,
-        appointments
-      })
+      .then(() => setState(
+        finalState
+      )
     );
   }
   return {state, setState, setDay, bookInterview, cancelInterview}
