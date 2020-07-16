@@ -8,6 +8,7 @@ import useApplicationData from "../hooks/useApplicationData"
 
 
 export default function Application(props) {
+
   const {
     state,
     setState,
@@ -30,7 +31,7 @@ export default function Application(props) {
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   const scheduler = appointments.map((appointment) => {
-    console.log(interviewers);
+    // Changed interview prop to have the function run inside of it
     return (
       <Appointment
         key={appointment.id}
@@ -43,6 +44,7 @@ export default function Application(props) {
       />
     )
   })
+  //When day is selected, it returns a list of available slots and appointments
   return (
     <main className="layout">
       <section className="sidebar">

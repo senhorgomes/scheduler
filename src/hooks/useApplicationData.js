@@ -8,6 +8,7 @@ export default function useAplicationData() {
     appointments: {}
   });
 
+  //Function to select and set day
   const setDay = day => setState({ ...state, day });
 
   //Retreiving days from api/days and storing them using useState
@@ -29,7 +30,7 @@ export default function useAplicationData() {
       })
     );
   }
-
+  //Deletes interview by setting the interview to null
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
