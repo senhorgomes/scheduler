@@ -23,3 +23,8 @@ npm test
 ```sh
 npm run storybook
 ```
+## Screenshots
+
+!["Screenshot of empty spot"](https://github.com/senhorgomes/scheduler/blob/master/docs/Scheduler1.png)
+!["Screenshot of registering spot"](https://github.com/senhorgomes/scheduler/blob/master/docs/Scheduler2.png)
+!["Screenshot of spot being filled"](https://github.com/senhorgomes/scheduler/blob/master/docs/Scheduler3.png)
