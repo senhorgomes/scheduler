@@ -5,12 +5,6 @@ import "components/InterviewerList.scss";
 import PropTypes from "prop-types";
 
 export default function InterviewerList(props) {
-  // const interviewsClass = classnames("interviewers", {
-  //   "interviewers__header": props.selected,
-  //   "interviewers__list": props.avatar,
-  //   }
-  // )
-  
   
   const interviewersAvailable = props.interviewers.map((interviewer) => {
     return(
