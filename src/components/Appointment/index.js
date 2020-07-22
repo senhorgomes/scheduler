@@ -17,6 +17,7 @@ const CONFIRM = "CONFIRM";
 const DELETING = "DELETING";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_SAVE_INFO = "ERROR_SAVE_INFO";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
@@ -24,15 +25,20 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
   const save = (name, interviewer) => {
-    const interview = {
-      student: name,
-      interviewer
-    };
-    transition(SAVING);
-    props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
+    // Will only save if interview and name exist, if not an error message appears
+    if (name && interviewer) {
+      const interview = {
+        student: name,
+        interviewer
+      };
+      transition(SAVING);
+      props
+        .bookInterview(props.id, interview)
+        .then(() => transition(SHOW))
+        .catch(error => transition(ERROR_SAVE, true));
+    } else {
+      transition(ERROR_SAVE_INFO, true)
+    }
   }
 
   const deleteInterview = () => {
@@ -94,6 +100,12 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && (
         <Error
           message={"Could not save appointment."}
+          onClose={back}
+        />
+      )}
+      {mode === ERROR_SAVE_INFO && (
+        <Error
+          message={"Please fill in your name and select an interviewer before saving."}
           onClose={back}
         />
       )}
