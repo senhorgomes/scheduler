@@ -19,11 +19,15 @@ export default function Form(props) {
 
   function validate() {
     if (name === "" && interviewer === null) {
-      setError("Appointments must have a student name and a selected interviewer");
+      setError("Appointments must have a student name and an interviewer");
       return;
     }
-    if (student === "") {
-      ("Student name cannot be blank");
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    } 
+    if (interviewer === null) {
+      setError("An interviewer must be selected");
       return;
     } 
     props.onSave(name, interviewer);
