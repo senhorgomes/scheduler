@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllbyTestId } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -16,8 +16,10 @@ describe("Application", () => {
     });;
   });
 
-  xit("loads data, books an interview and reduces the spots remaining for the Monday by 1", () => {
+  xit("loads data, books an interview and reduces the spots remaining for the Monday by 1", async() => {
     const { container } = render(<Application />);
+    const appointments = getAllByTestId(container, "appointment");
+
     //waits for an element to render before doing something
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
