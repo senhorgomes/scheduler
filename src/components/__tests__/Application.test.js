@@ -18,7 +18,7 @@ describe("Application", () => {
 
   xit("loads data, books an interview and reduces the spots remaining for the Monday by 1", () => {
     const { container } = render(<Application />);
-
+    //waits for an element to render before doing something
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     console.log(prettyDOM(container));
